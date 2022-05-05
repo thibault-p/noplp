@@ -1,0 +1,79 @@
+.background {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -9000;
+    isolation: isolate;
+    background-color: #078bc5;;
+    box-shadow: inset 0 0 80vh #000000;
+}
+
+@keyframes infinite-rotate {  
+    0% { -webkit-transform: rotate(-3deg); }
+    100% { -webkit-transform: rotate(3deg); }
+}
+
+.spotlight-container {
+    position: absolute;
+    transform-origin: 50% 0;
+}
+
+.spotlight {
+    position: absolute;
+    transform-origin: 50% 0;
+    opacity: 1;
+    top: -30vh;
+     animation: infinite-rotate ease-in-out infinite;
+    animation-direction: alternate;
+    height: 120vh;
+    width: 10vw;
+    background: rgb(255,255,255);
+    background: linear-gradient(-180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+    mix-blend-mode: screen;
+    mask-image: url('../../public/spotlight-mask.png');
+    mask-clip: content-box;
+    mask-size: 100% 100%;
+    mask-repeat: no-repeat;
+    filter: blur(20px);
+}
+
+.snowflake {
+    --size: 1vw;
+    width: var(--size);
+    height: var(--size);
+    background: white;
+    border-radius: 5%;
+    box-shadow:  0 0 2vw #fff;
+    position: absolute;
+    top: -6vh;
+    filter: blur(2px);
+  }
+  
+  @keyframes snowfall {
+    0% {
+      transform: translateY(-10vh) rotateX(var(--rotation-x-ini)) rotateY(var(--rotation-y-ini)) rotateZ(var(--rotation-z-ini)) translateX(var(--left-ini));
+    }
+    100% {
+      transform: translateY(115vh) rotateX(var(--rotation-x-end)) rotateY(var(--rotation-y-end)) rotateZ(var(--rotation-z-end)) translateX(var(--left-end));
+    }
+  }
+  
+  @for $i from 1 through 40 {
+    .snowflake:nth-child(#{$i}) {
+      --size: #{random(5) + 1}vw;
+      --left-ini: #{random(20) - 10}vw;
+      --left-end: #{random(20) - 10}vw;
+      --rotation-x-ini: #{random(360)}deg;
+      --rotation-x-end: #{random(360)}deg;
+      --rotation-y-ini: #{random(360)}deg;
+      --rotation-y-end: #{random(360)}deg;
+      --rotation-z-ini: #{random(360)}deg;
+      --rotation-z-end: #{random(360)}deg;
+      left: #{random(100)}vw;
+      animation: snowfall #{5 + random(2)}s linear infinite;
+      animation-delay: -#{random(5)}s;
+    }
+  }
+  

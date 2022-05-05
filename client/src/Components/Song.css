@@ -1,0 +1,38 @@
+.song-title {
+    color: #bdbdc0;
+    font-weight: bold;
+}
+
+.song-artist {
+    color: #818185;
+    font-size: 0.8em;
+}
+
+.song-info {
+    position: absolute;
+    top: 10vh;
+    left: 50%;
+    padding-left: 4em;
+    padding-right: 4em;
+    transform: translate(-50%);
+}
+
+.song-lyrics {
+    font-weight: bolder;
+}
+
+.lyrics-word {
+    color: #dfbc21
+}
+
+.lyrics-word.good {
+    color: #598813;
+}
+
+.lyrics-word.bad {
+    color: #881313;
+}
+
+.lyrics-word.freeze {
+    color: #4881eb;
+}

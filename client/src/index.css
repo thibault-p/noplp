@@ -1,0 +1,7 @@
+@font-face {
+  font-family: 'helveticacondensed_black';
+  src: url('../public/helvetica-condensed-black-webfont.woff2') format('woff2'),
+       url('../public/helvetica-condensed-black-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}

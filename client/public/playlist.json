@@ -1,0 +1,51 @@
+{
+    "name": "AnnePy",
+    "categories": [
+        {
+            "id": "3394634a-29d0-40a6-bf24-5480acef9f0d",
+            "name": "First category"
+        },
+        {
+            "id": "3394634a-29d0-40a6-bf24-5480acef9f01",
+            "name": "Second category"
+        }
+    ],
+    "songs": [
+        {
+            "id": "a491eb43-6a44-46e1-a1ea-bc92379efc0e",
+            "category": "3394634a-29d0-40a6-bf24-5480acef9f0d",
+            "artist": "Rick Asley",
+            "title": "Never Gonna Give You Up",
+            "files": {
+                "lyrics": "/lyrics/Never_Gonna_Give_You_Up.lrc",
+                "music": "/songs/Never_Gonna_Give_You_Up.mp3"
+            },
+            "guess_line": 2,
+            "guess_timecode": "00:28.40"
+        },
+        {
+            "id": "a491eb43-6a44-46e1-a1ea-bc92379efc01",
+            "category": "3394634a-29d0-40a6-bf24-5480acef9f0d",
+            "artist": "Jacques Brel",
+            "title": "Quand on n'a que l'amour",
+            "files": {
+                "lyrics": "/lyrics/Quand_on_n_a_que_l_amour.lrc",
+                "music": "/songs/Quand_on_n_a_que_l_amour.mp3"
+            },
+            "guess_line": 19,
+            "guess_timecode": "01:07.20"
+        },
+        {
+            "id": "a491eb43-6a44-46e1-a1ea-bc92379efc11",
+            "category": "3394634a-29d0-40a6-bf24-5480acef9f0d",
+            "artist": "Zazie",
+            "title": "Zen",
+            "files": {
+                "lyrics": "/lyrics/Zen.lrc",
+                "music": "/songs/Zen.mp3"
+            },
+            "guess_line": 19,
+            "guess_timecode": "01:38.40"
+        }
+    ]
+}

@@ -1,0 +1,19 @@
+body { 
+    margin: 0;
+    background-color: black;
+    overflow: hidden;
+    height: 100vh;
+    font-family: 'helveticacondensed_black';
+}
+
+.content {
+    margin:0 auto;
+    width: 80%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    -ms-flex-align: center;
+    row-gap: 2em;
+    align-items: stretch;
+    justify-content: center;
+}

@@ -1,0 +1,20 @@
+.textbox {
+    font-family: 'helveticacondensed_black';
+    margin-bottom: 0.3em;
+    padding: 0.2em;
+    color: antiquewhite;
+    text-transform: uppercase;
+    font-size: 2.5em;
+    min-height: 1em;
+    border: solid #c9e0f8 0.1em;
+    border-radius: 0.5em;
+    text-align: center;
+    background-color: #1442b5;
+    background: linear-gradient(0deg, #161b62 0%, #557de3 100%);
+    box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.26), 0 4px 6px rgba(0,0,0,0.45);
+    white-space: nowrap;
+}
+
+.textbox.disabled { 
+    color: #1d2133;
+}
