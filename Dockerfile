@@ -5,7 +5,8 @@ COPY client/package.json client/package-lock.json ./
 RUN npm install
 
 COPY client/ .
-RUN npm run build
+RUN rm .env \
+    && npm run build
 
 
 FROM node:16

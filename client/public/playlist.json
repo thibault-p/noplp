@@ -28,6 +28,7 @@
             "category": "3394634a-29d0-40a6-bf24-5480acef9f0d",
             "artist": "Jacques Brel",
             "title": "Quand on n'a que l'amour",
+            "year": "1956",
             "files": {
                 "lyrics": "/lyrics/Quand_on_n_a_que_l_amour.lrc",
                 "music": "/songs/Quand_on_n_a_que_l_amour.mp3"
@@ -46,6 +47,45 @@
             },
             "guess_line": 19,
             "guess_timecode": "01:38.40"
+        },
+        {
+            "id": "a491eb43-6a44-46e1-a1ea-bc92379efcc4",
+            "category": "3394634a-29d0-40a6-bf24-5480acef9f0d",
+            "artist": "Henri Salvador",
+            "title": "Jardin d'Hiver",
+            "year": "2000",
+            "files": {
+                "lyrics": "/lyrics/jardin_d_hiver.lrc",
+                "music": "/songs/jardin_d_hiver.mp3"
+            },
+            "guess_line": 11,
+            "guess_timecode": "00:49.45"
+        },
+        {
+            "id": "a491eb43-6a44-46e1-a1ea-bc92379eff4",
+            "category": "3394634a-29d0-40a6-bf24-5480acef9f0d",
+            "artist": "Gilbert Bécaud",
+            "title": "Je reviens te chercher",
+            "year": "1968",
+            "files": {
+                "lyrics": "/lyrics/je_reviens_te_chercher.lrc",
+                "music": "/songs/je_reviens_te_chercher.mp3"
+            },
+            "guess_line": 8,
+            "guess_timecode": "00:36.40"
+        },
+        {
+            "id": "a491eb43-6a44-46e1-a1ea-bc92379eff2",
+            "category": "3394634a-29d0-40a6-bf24-5480acef9f0d",
+            "artist": "Laurent Voulzy",
+            "title": "Le Pouvoir des Fleurs",
+            "year": "1992",
+            "files": {
+                "lyrics": "/lyrics/le_pouvoir_des_fleurs.lrc",
+                "music": "/songs/le_pouvoir_des_fleurs.mp3"
+            },
+            "guess_line": 17,
+            "guess_timecode": "01:06.30"
         }
     ]
 }

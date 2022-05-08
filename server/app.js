@@ -9,9 +9,9 @@ const port = process.env.PORT || 4001
 
 const app = express()
 // app.use(index)
-// app.use(cors({
-//     origin: 'http://localhost:3000',
-// }));
+app.use(cors({
+    origin: 'http://localhost:3000',
+}));
 
 app.use('/', express.static(path.join(__dirname, 'public')))
 

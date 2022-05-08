@@ -11,6 +11,7 @@ export default function SongList(props) {
             {props.songs.map((song, i) => (<TextBox disabled={song.picked} key={i} >
                     <div>{song.title} </div>
                     <div className="song-artist">{song.artist} </div>
+                    <div className="song-artist">{song.year}</div>
                 </TextBox>))}
         </>
     )

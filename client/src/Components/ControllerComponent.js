@@ -77,6 +77,7 @@ export default class ControllerComponent extends ClientComponent {
                 picked: this.state.pickedSongs.indexOf(s.id) !== -1,
                 title: s.title,
                 artist: s.artist,
+                year: s.year,
             }
         }).sort();
         console.log(songs)

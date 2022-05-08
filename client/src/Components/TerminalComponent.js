@@ -24,6 +24,7 @@ export default class TerminalComponent extends ClientComponent {
                 state: STATE_LYRICS_NONE,
             },
             payload: {},
+            backgroundType: 'good',
         };
         this.soundRefs = {
             intro: React.createRef(),
@@ -31,6 +32,7 @@ export default class TerminalComponent extends ClientComponent {
         };
 
         this.playSound = this.playSound.bind(this);
+        this.handleFlashColor = this.handleFlashColor.bind(this);
     }
 
     componentDidMount() {
@@ -126,9 +128,25 @@ export default class TerminalComponent extends ClientComponent {
         );
     }
 
+    handleFlashColor(color) {
+        console.log('Flash Color', color);
+        const apply = ((c) => {
+            this.setState({
+                ...this.state,
+                backgroundType: c,
+            });
+        });
+       
+        this.setState({
+            ...this.state,
+            backgroundType: '',
+        }, apply);
+
+    }
+
     render() {
         let content;
-        let background = (<Background />);
+        let background = (<Background className={this.state.backgroundType} />);
         if (this.state.current === STATE_LOADING) {
             background = undefined;
             content =  this._renderLoading();
@@ -137,7 +155,11 @@ export default class TerminalComponent extends ClientComponent {
         } else if (this.state.current === STATE_SONGLIST) {
             content = (<SongList title={this.state.payload.name} songs={this.state.payload.songs} jukebox={this.playSound} />);
         } else if (this.state.current === STATE_SONG) {
-            content = (<Song song={this.state.payload} suggestedLyrics={this.state.suggestedLyrics} jukebox={this.playSound} />);
+            content = (<Song 
+                colorFlash={this.handleFlashColor}
+                song={this.state.payload} 
+                suggestedLyrics={this.state.suggestedLyrics} 
+                jukebox={this.playSound} />);
         } else if (this.state.current === STATE_CATEGORIES) {
             content = (<Categories categories={this.state.payload} jukebox={this.playSound} />)
         }

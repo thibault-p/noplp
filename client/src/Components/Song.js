@@ -165,10 +165,11 @@ export default class Song extends React.Component {
                 if (suggestedLyrics.state === STATE_LYRICS_FROZEN) {
                     wordClass = 'freeze';
                 } else if (suggestedLyrics.state === STATE_LYRICS_VALIDATE) {
-                    wordClass = ' bad';
+                    wordClass = 'bad';
                     if (i < correctWords.length && correctWords[i].toUpperCase() === w.toUpperCase()) {
                         wordClass = 'good';
                     }
+                    this.props.colorFlash(wordClass);
                 }
                 return (
                     <span className={`lyrics-word ${wordClass}`} key={`word-${i}`}>{`${w} `}</span>

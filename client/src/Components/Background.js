@@ -19,7 +19,7 @@ export default function Background(props) {
         flakes.push({});
     }
     return (
-        <div className="background">
+        <div className={`background ${props.className}`}>
             {spots.map((s, i) => {
                 return (
                     <div key={`spot-${i}`} className="spotlight-container" style={{left: s.x,opacity: s.o ,transform: `rotate(${s.r}deg)`}}> 

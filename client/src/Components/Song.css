@@ -1,11 +1,11 @@
 .song-title {
     color: #bdbdc0;
-    font-weight: bold;
 }
 
 .song-artist {
-    color: #818185;
-    font-size: 0.8em;
+    color: #82c1fd;
+    font-style: italic;
+    font-size: 0.6em;
 }
 
 .song-info {
@@ -17,22 +17,19 @@
     transform: translate(-50%);
 }
 
-.song-lyrics {
-    font-weight: bolder;
-}
 
 .lyrics-word {
-    color: #dfbc21
+    color: #decb18
 }
 
 .lyrics-word.good {
-    color: #598813;
+    color: #38f716;
 }
 
 .lyrics-word.bad {
-    color: #881313;
+    color: #da031c;
 }
 
 .lyrics-word.freeze {
-    color: #4881eb;
+    color: #6c89e8;
 }
