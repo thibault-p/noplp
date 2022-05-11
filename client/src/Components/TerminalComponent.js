@@ -4,7 +4,7 @@ import Background from "./Background";
 import Categories from "./Categories";
 import ClientComponent from "./ClientComponent";
 import Logo from "./Logo";
-import Song, {STATE_LYRICS_FROZEN, STATE_LYRICS_NONE, STATE_LYRICS_VALIDATE, STATE_LYRICS_SUGGESTED} from "./Song";
+import Song, {STATE_LYRICS_FROZEN, STATE_LYRICS_NONE, STATE_LYRICS_VALIDATE, STATE_LYRICS_SUGGESTED, STATE_LYRICS_REVEAL} from "./Song";
 import SongList from "./SongList";
 
 const STATE_LOADING = 'loading';
@@ -27,8 +27,12 @@ export default class TerminalComponent extends ClientComponent {
             backgroundType: 'good',
         };
         this.soundRefs = {
-            intro: React.createRef(),
-            bed: React.createRef(),
+            intro: { ref: React.createRef(), volume: 1 },
+            bed: { ref: React.createRef(), volume: 0.5 },
+            good: { ref: React.createRef(), volume: 1 },
+            freeze: { ref: React.createRef(), volume: 1 },
+            bad: { ref: React.createRef(), volume: 1 },
+            introBed: { ref: React.createRef(), volume: 0.3 },
         };
 
         this.playSound = this.playSound.bind(this);
@@ -69,12 +73,16 @@ export default class TerminalComponent extends ClientComponent {
         this.socket.on('validate-lyrics', () => {
             this.handleSuggestedLyrics(STATE_LYRICS_VALIDATE, '');
         });
+
+        this.socket.on('reveal-lyrics', () => {
+            this.handleSuggestedLyrics(STATE_LYRICS_REVEAL, '');
+        });
     }
 
     playSound(sound) {
         // Stop all playing sound
         for (let k in this.soundRefs) {
-            const ref = this.soundRefs[k].current;
+            const ref = this.soundRefs[k].ref.current;
             if (ref !== null){
                 console.log('Stop', ref);
                 ref.pause();
@@ -83,9 +91,10 @@ export default class TerminalComponent extends ClientComponent {
         if (sound === '')
             return;
 
-        const ref = this.soundRefs[sound].current;
+        const ref = this.soundRefs[sound].ref.current;
             if (ref !== null) {
                 console.log('Play', ref);
+                ref.volume = this.soundRefs[sound].volume;
                 ref.play();
             }
     }
@@ -95,6 +104,7 @@ export default class TerminalComponent extends ClientComponent {
             ...this.state,
             payload: payload,
             current: action,
+            backgroundType: '',
             suggestedLyrics: {
                 content: '',
                 state: STATE_LYRICS_NONE,
@@ -129,24 +139,15 @@ export default class TerminalComponent extends ClientComponent {
     }
 
     handleFlashColor(color) {
-        console.log('Flash Color', color);
-        const apply = ((c) => {
-            this.setState({
-                ...this.state,
-                backgroundType: c,
-            });
-        });
-       
         this.setState({
             ...this.state,
-            backgroundType: '',
-        }, apply);
-
+            backgroundType: color,
+        });
     }
 
     render() {
         let content;
-        let background = (<Background className={this.state.backgroundType} />);
+        let background = (<Background effect={this.state.backgroundType} />);
         if (this.state.current === STATE_LOADING) {
             background = undefined;
             content =  this._renderLoading();
@@ -166,8 +167,12 @@ export default class TerminalComponent extends ClientComponent {
 
         return (
             <>
-                <audio src="/generique.mp3" ref={this.soundRefs.intro}></audio>
-                <audio src="/waiting.mp3" loop={true} ref={this.soundRefs.bed}></audio>
+                <audio src="/generique.mp3" ref={this.soundRefs.intro.ref} onEnded={() => this.playSound('introBed')}></audio>
+                <audio src="/intro_bed.mp3" loop={true} ref={this.soundRefs.introBed.ref}></audio>
+                <audio src="/waiting.mp3" loop={true} ref={this.soundRefs.bed.ref}></audio>
+                <audio src="/win.mp3" ref={this.soundRefs.good.ref}></audio>
+                <audio src="/win.mp3" ref={this.soundRefs.bad.ref}></audio>
+                <audio src="/freeze.mp3" ref={this.soundRefs.freeze.ref}></audio>
                 {background}
                 <div>
                     {content}

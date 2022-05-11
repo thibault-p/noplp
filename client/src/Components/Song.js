@@ -7,6 +7,7 @@ export const STATE_LYRICS_NONE = 'none';
 export const STATE_LYRICS_SUGGESTED = 'suggested';
 export const STATE_LYRICS_FROZEN = 'frozen';
 export const STATE_LYRICS_VALIDATE = ' validate';
+export const STATE_LYRICS_REVEAL = 'reveal';
 
 export default class Song extends React.Component {
     constructor(props) {
@@ -15,6 +16,7 @@ export default class Song extends React.Component {
             audioReady: false,
             lyricsReady: false,
             currentLine: -1,
+            wordsClass: [],
         };
         this.audio = React.createRef();
         this.audioSource = React.createRef();
@@ -33,6 +35,57 @@ export default class Song extends React.Component {
             this.load();
         }
         this.startPlaying();
+
+        const suggestedLyrics = this.props.suggestedLyrics;
+        if (suggestedLyrics.state !== prevProps.suggestedLyrics.state) {
+
+            console.log('Suggested state changed', suggestedLyrics)
+            if (suggestedLyrics.state !== STATE_LYRICS_NONE && this.props.song.guess_line === this.state.currentLine) {
+                const correctWords = this.lyrics[this.state.currentLine].content.split(' ');
+                let lyrics = suggestedLyrics.content;
+                if (suggestedLyrics.state === STATE_LYRICS_REVEAL) {
+                    lyrics = this.lyrics[this.state.currentLine].content;
+                }
+                const wordsClass = lyrics.split(' ').map((w, i) => {
+                    let wordClass = '';
+                    if (suggestedLyrics.state === STATE_LYRICS_FROZEN) {
+                        wordClass = 'freeze';
+                    } else if (suggestedLyrics.state === STATE_LYRICS_VALIDATE) {
+                        if (i < correctWords.length && correctWords[i].toUpperCase() === w.toUpperCase()) {
+                            wordClass = 'good';
+                            console.log('good for', w , i)
+                        } else {
+                            console.log('bad for', w , i)
+                            wordClass = 'bad'
+                        }
+                    }
+                    return wordClass
+                });
+
+                const isFreeze = wordsClass.filter(c => c === 'freeze').length > 0;
+                const isBad = wordsClass.filter(c => c === 'bad').length > 0;
+                const isGood = wordsClass.filter(c => c === 'good').length === correctWords.length;
+
+                let effect = '';
+                if (isFreeze) { 
+                    effect = 'freeze';
+                } else if (isBad) {
+                    effect = 'bad';
+                } else if (isGood) {
+                    effect = 'good';
+                }
+
+                this.setState({
+                    ...this.state,
+                    wordsClass: wordsClass,
+                });
+
+                if (effect !== '') {
+                    this.props.colorFlash(effect);
+                    this.props.jukebox(effect);
+                }
+            }
+        }
     }
 
     load() {
@@ -159,20 +212,15 @@ export default class Song extends React.Component {
         if (suggestedLyrics.state !== STATE_LYRICS_NONE && this.props.song.guess_line === this.state.currentLine) {
             const previousLine = this.lyrics[this.state.currentLine - 1].content;
             const correctWords = this.lyrics[this.state.currentLine].content.split(' ');
-
-            const words = suggestedLyrics.content.split(' ').map((w,i) => {
-                let wordClass = '';
-                if (suggestedLyrics.state === STATE_LYRICS_FROZEN) {
-                    wordClass = 'freeze';
-                } else if (suggestedLyrics.state === STATE_LYRICS_VALIDATE) {
-                    wordClass = 'bad';
-                    if (i < correctWords.length && correctWords[i].toUpperCase() === w.toUpperCase()) {
-                        wordClass = 'good';
-                    }
-                    this.props.colorFlash(wordClass);
-                }
+            let lyrics = suggestedLyrics.content;
+            if (suggestedLyrics.state === STATE_LYRICS_REVEAL) {
+                lyrics = this.lyrics[this.state.currentLine].content;
+            }
+            console.log(suggestedLyrics)
+            console.log(lyrics)
+            const words = lyrics.split(' ').map((w, i) => {
                 return (
-                    <span className={`lyrics-word ${wordClass}`} key={`word-${i}`}>{`${w} `}</span>
+                    <span className={`lyrics-word ${this.state.wordsClass[i]}`} key={`word-${i}`}>{`${w} `}</span>
                 )
             });
             return (

@@ -11,8 +11,10 @@ export default class ClientComponent extends React.Component {
 
     componentDidMount() {
         // Install communication
-        console.log('Open connexion to', process.env.REACT_APP_WEBSOCKET_SERVER);
-        this.socket = socketIOClient(process.env.REACT_APP_WEBSOCKET_SERVER);
+        if (this.socket === null) {
+            console.log('Open connexion to', process.env.REACT_APP_WEBSOCKET_SERVER);
+            this.socket = socketIOClient(process.env.REACT_APP_WEBSOCKET_SERVER);
+        }
     }
 
     componentWillUnmount() {

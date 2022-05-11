@@ -2,12 +2,24 @@
     "name": "AnnePy",
     "categories": [
         {
-            "id": "3394634a-29d0-40a6-bf24-5480acef9f0d",
-            "name": "First category"
+            "id": "3394634a-29d0-40a6-bf24-5480acef9f00",
+            "name": "Émotion poussiéreuse"
         },
         {
             "id": "3394634a-29d0-40a6-bf24-5480acef9f01",
-            "name": "Second category"
+            "name": "Casser la voix"
+        },
+        {
+            "id": "3394634a-29d0-40a6-bf24-5480acef9f02",
+            "name": "La main verte"
+        },
+        {
+            "id": "3394634a-29d0-40a6-bf24-5480acef9f03",
+            "name": "Nostalgie"
+        },
+        {
+            "id": "3394634a-29d0-40a6-bf24-5480acef9f05",
+            "name": "Sang froid"
         }
     ],
     "songs": [
@@ -21,11 +33,12 @@
                 "music": "/songs/Never_Gonna_Give_You_Up.mp3"
             },
             "guess_line": 2,
-            "guess_timecode": "00:28.40"
+            "guess_timecode": "00:28.40",
+            "expected_words": 5
         },
         {
             "id": "a491eb43-6a44-46e1-a1ea-bc92379efc01",
-            "category": "3394634a-29d0-40a6-bf24-5480acef9f0d",
+            "category": "3394634a-29d0-40a6-bf24-5480acef9f00",
             "artist": "Jacques Brel",
             "title": "Quand on n'a que l'amour",
             "year": "1956",
@@ -34,11 +47,12 @@
                 "music": "/songs/Quand_on_n_a_que_l_amour.mp3"
             },
             "guess_line": 19,
-            "guess_timecode": "01:07.20"
+            "guess_timecode": "01:07.20",
+            "expected_words": 3
         },
         {
             "id": "a491eb43-6a44-46e1-a1ea-bc92379efc11",
-            "category": "3394634a-29d0-40a6-bf24-5480acef9f0d",
+            "category": "3394634a-29d0-40a6-bf24-5480acef9f05",
             "artist": "Zazie",
             "title": "Zen",
             "files": {
@@ -46,11 +60,12 @@
                 "music": "/songs/Zen.mp3"
             },
             "guess_line": 19,
-            "guess_timecode": "01:38.40"
+            "guess_timecode": "01:38.40",
+            "expected_words": 6
         },
         {
             "id": "a491eb43-6a44-46e1-a1ea-bc92379efcc4",
-            "category": "3394634a-29d0-40a6-bf24-5480acef9f0d",
+            "category": "3394634a-29d0-40a6-bf24-5480acef9f02",
             "artist": "Henri Salvador",
             "title": "Jardin d'Hiver",
             "year": "2000",
@@ -59,11 +74,12 @@
                 "music": "/songs/jardin_d_hiver.mp3"
             },
             "guess_line": 11,
-            "guess_timecode": "00:49.45"
+            "guess_timecode": "00:49.45",
+            "expected_words": 6
         },
         {
             "id": "a491eb43-6a44-46e1-a1ea-bc92379eff4",
-            "category": "3394634a-29d0-40a6-bf24-5480acef9f0d",
+            "category": "3394634a-29d0-40a6-bf24-5480acef9f00",
             "artist": "Gilbert Bécaud",
             "title": "Je reviens te chercher",
             "year": "1968",
@@ -72,11 +88,12 @@
                 "music": "/songs/je_reviens_te_chercher.mp3"
             },
             "guess_line": 8,
-            "guess_timecode": "00:36.40"
+            "guess_timecode": "00:36.30",
+            "expected_words": 6
         },
         {
             "id": "a491eb43-6a44-46e1-a1ea-bc92379eff2",
-            "category": "3394634a-29d0-40a6-bf24-5480acef9f0d",
+            "category": "3394634a-29d0-40a6-bf24-5480acef9f02",
             "artist": "Laurent Voulzy",
             "title": "Le Pouvoir des Fleurs",
             "year": "1992",
@@ -85,7 +102,78 @@
                 "music": "/songs/le_pouvoir_des_fleurs.mp3"
             },
             "guess_line": 17,
-            "guess_timecode": "01:06.30"
+            "guess_timecode": "01:06.30",
+            "expected_words": 6
+        },
+        {
+            "id": "a491eb43-6a44-46e1-a1ea-bc92379efa2",
+            "category": "3394634a-29d0-40a6-bf24-5480acef9f03",
+            "artist": "Maxime Le Forestier",
+            "title": "Education sentimentale",
+            "year": "1973",
+            "files": {
+                "lyrics": "/lyrics/education_sentimentale.lrc",
+                "music": "/songs/education_sentimentale.mp3"
+            },
+            "guess_line": 6,
+            "guess_timecode": "00:49.00",
+            "expected_words": 7
+        },
+        {
+            "id": "a491eb43-6a44-46e1-a1ea-bc92379efe2",
+            "category": "3394634a-29d0-40a6-bf24-5480acef9f05",
+            "artist": "Marc Lavoine",
+            "title": "Elle a les yeux revolver",
+            "year": "1985",
+            "files": {
+                "lyrics": "/lyrics/elle_a_les_yeux_revolver.lrc",
+                "music": "/songs/elle_a_les_yeux_revolver.mp3"
+            },
+            "guess_line": 15,
+            "guess_timecode": "01:09.00",
+            "expected_words": 5
+        },
+        {
+            "id": "a491eb43-6a44-46e1-a1ea-bc92379ede2",
+            "category": "3394634a-29d0-40a6-bf24-5480acef9f03",
+            "artist": "Renaud",
+            "title": "Mistral Gagnant",
+            "year": "1985",
+            "files": {
+                "lyrics": "/lyrics/mistral_gagnant.lrc",
+                "music": "/songs/mistral_gagnant.mp3"
+            },
+            "guess_line": 22,
+            "guess_timecode": "01:28.00",
+            "expected_words": 5
+        },
+        {
+            "id": "a491eb43-6a44-46e1-a1ea-bc92379ede5",
+            "category": "3394634a-29d0-40a6-bf24-5480acef9f01",
+            "artist": "Lara Fabian",
+            "title": "Je t'aime",
+            "year": "1996",
+            "files": {
+                "lyrics": "/lyrics/je_t_aime.lrc",
+                "music": "/songs/je_t_aime.mp3"
+            },
+            "guess_line": 22,
+            "guess_timecode": "01:55.00",
+            "expected_words": 6
+        },
+        {
+            "id": "a491eb43-6a44-46e1-a1ea-bc92379ede6",
+            "category": "3394634a-29d0-40a6-bf24-5480acef9f01",
+            "artist": "Céline Dion",
+            "title": "Pour que tu m'aimes encore",
+            "year": "1995",
+            "files": {
+                "lyrics": "/lyrics/pour_que_tu_m_aimes_encore.lrc",
+                "music": "/songs/pour_que_tu_m_aimes_encore.mp3"
+            },
+            "guess_line": 13,
+            "guess_timecode": "01:34.00",
+            "expected_words": 5
         }
     ]
 }

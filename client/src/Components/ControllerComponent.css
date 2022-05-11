@@ -1,0 +1,45 @@
+.controller {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5em;
+    font-size: 1em;
+}
+
+.lyrics-form {
+    display: flex;
+    flex-direction: column;
+    column-gap: 0.3em;
+}
+
+.lyrics-form div {
+    display: flex;
+}
+
+.lyrics-form input {
+    line-height: 2em;
+    font-size: 1em;
+    flex: 1;
+}
+
+.category {
+    border: solid 1px white;
+    padding: 0.3em;
+    display: flex;
+    flex-direction: column;
+}
+
+button {
+    border: none;
+    font-size: 1em;
+    padding: 0.6em;
+    margin: 0.2em;
+    flex: 1;
+}
+.category .title {
+    flex: 1;
+    background-color: rgb(99, 144, 212);
+}
+
+.category .songs {
+    display: flex;
+}

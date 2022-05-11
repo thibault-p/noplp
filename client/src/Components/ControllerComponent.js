@@ -2,6 +2,8 @@ import React from "react";
 
 import ClientComponent from "./ClientComponent";
 
+import './ControllerComponent.css';
+
 export default class ControllerComponent extends ClientComponent {
     constructor(props) { 
         super(props);
@@ -10,6 +12,7 @@ export default class ControllerComponent extends ClientComponent {
             pickedSongs: [],
             pickedCategories: [],
             proposedLyrics: '',
+            expectedWords: 0,
         };
 
         this.handleToIntro = this.handleToIntro.bind(this);
@@ -21,6 +24,7 @@ export default class ControllerComponent extends ClientComponent {
         this.handleInput = this.handleInput.bind(this);
         this.handleLyricsFreeze = this.handleLyricsFreeze.bind(this);
         this.handleLyricsValidate = this.handleLyricsValidate.bind(this);
+        this.handleLyricsReveal = this.handleLyricsReveal.bind(this);
     }
 
     componentDidMount() {
@@ -98,10 +102,14 @@ export default class ControllerComponent extends ClientComponent {
         const song = this.state.playlist.songs.find(song => song.id === id);
         console.log('goto song', song);
         this.socket.emit('goto-song', song);
+        this.setState({
+            ...this.state,
+            expectedWords: song.expected_words || 0
+        })
     }
 
     handleProposeLyrics() {
-        const lyrics = this.state.proposedLyrics;
+        const lyrics = this.state.proposedLyrics.trim();
         console.log(' propose Lyrics', lyrics);
         this.socket.emit('propose-lyrics', lyrics);
     }
@@ -122,37 +130,55 @@ export default class ControllerComponent extends ClientComponent {
         this.socket.emit('validate-lyrics');
     }
 
+    handleLyricsReveal() {
+        this.socket.emit('reveal-lyrics');
+    }
+
     render() {
         const songList = this.state.playlist.songs || [];
-        const songsElements = songList.map(song => {
-            return (<button key={song.id} onClick={() => this.handleToSong(song.id)}>Go to "{song.title}"</button>)
-        }); 
+        const categories = (this.state.playlist.categories || []).map(c => {
+            return {
+                ...c,
+                songs: songList.filter(s => s.category === c.id),
+            }
+        });
 
-        const categories = this.state.playlist.categories || [];
         const categoriesElements = categories.map(cat => {
-            return (<button key={cat.id} onClick={() => this.handleToSongList(cat.id)}>Go to "{cat.name}"</button>);
-        })
+            const songsElements = cat.songs.map(song => {
+                return (<button key={song.id} onClick={() => this.handleToSong(song.id)}>Go to "{song.title}"</button>)
+            }); 
+            return (
+                <div className="category" key={`category-${cat.id}`}>
+                    <button className="title" key={cat.id} onClick={() => this.handleToSongList(cat.id)}>Go to "{cat.name}"</button>
+                    <div className="songs">
+                        {songsElements}
+                    </div>
+                </div>
+            );
+        });
+
+        const canPropose = this.state.expectedWords > 0 && this.state.proposedLyrics.trim().split(' ').length === this.state.expectedWords;
 
         return (
-            <>
+            <div className="controller">
+                <button onClick={this.handleReset}>!!!! RESET !!!!</button>
                 <button onClick={this.handleToIntro}>To intro</button>
-                <button onClick={() => this.handleToSongList()}>To Song list</button>
                 <button onClick={this.handleToCategories}>To Categories</button>
-                {categoriesElements}
-                {songsElements}
-
-                <div>
-                    <input  placeholder="Propose lyrics" 
+                <div className="lyrics-form">
+                    <input  placeholder={`${this.state.expectedWords} mots attendu`} 
                             ref={el => this.proposedLyricsRef = el} 
                             onChange={this.handleInput} />
-                    <button onClick={this.handleProposeLyrics}>Propose Lyrics</button>
-                    <button onClick={this.handleLyricsFreeze}>Freeze</button>
-                    <button onClick={this.handleLyricsValidate}>Validate</button>
+                    <div>
+                        <button onClick={this.handleProposeLyrics} disabled={!canPropose}>Propose Lyrics</button>
+                        <button onClick={this.handleLyricsFreeze} disabled={!canPropose}>Freeze</button>
+                        <button onClick={this.handleLyricsValidate} disabled={!canPropose}>Validate</button>
+                        <button onClick={this.handleLyricsReveal} disabled={!canPropose}>Reveal</button>
+                    </div>
                 </div>
+                {categoriesElements}
 
 
-                <button onClick={this.handleReset}>!!!! RESET !!!!</button>
-            </>
+            </div>
         )
     }
 }

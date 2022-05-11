@@ -28,8 +28,14 @@ const io = socketIo(server, {
     }
 });
 
+
+const sockets = [];
+
 io.on('connection', (socket) => {
-    console.log('New client connected');
+    
+    console.log(sockets)
+    console.log('New client connected', socket.id);
+    sockets.push(socket.id)
     console.log(socket.handshake.query.role)
 
     socket.join('karaoke');
@@ -70,6 +76,10 @@ io.on('connection', (socket) => {
 
     socket.on('freeze-lyrics', () => {
         socket.to('karaoke').emit('freeze-lyrics');
+    });
+
+    socket.on('reveal-lyrics', () => {
+        socket.to('karaoke').emit('reveal-lyrics');
     });
 
 });
