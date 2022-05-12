@@ -9,6 +9,8 @@ export default class ControllerComponent extends ClientComponent {
         super(props);
         this.state = {
             playlist: {},
+            ffaMode: false,
+            perfMode: false,
             pickedSongs: [],
             pickedCategories: [],
             proposedLyrics: '',
@@ -20,11 +22,13 @@ export default class ControllerComponent extends ClientComponent {
         this.handleToSong = this.handleToSong.bind(this);
         this.handleToCategories = this.handleToCategories.bind(this);
         this.handleReset = this.handleReset.bind(this);
+        this.handleFfaToggle = this.handleFfaToggle.bind(this);
         this.handleProposeLyrics = this.handleProposeLyrics.bind(this);
         this.handleInput = this.handleInput.bind(this);
         this.handleLyricsFreeze = this.handleLyricsFreeze.bind(this);
         this.handleLyricsValidate = this.handleLyricsValidate.bind(this);
         this.handleLyricsReveal = this.handleLyricsReveal.bind(this);
+        this.handlePerfModeToggle = this.handlePerfModeToggle.bind(this);
     }
 
     componentDidMount() {
@@ -49,8 +53,25 @@ export default class ControllerComponent extends ClientComponent {
         console.log('Reseting');
         this.setState({
             ...this.state,
+            ffaMode: false,
             pickedSongs: [],
             pickedCategories: [],
+        });
+    }
+
+    handlePerfModeToggle() {
+        this.setState({
+            ...this.state,
+            perfMode: !this.state.perfMode,
+        });
+        this.socket.emit('set-perf-mode', this.state.perfMode);
+    }
+
+    handleFfaToggle() {
+        console.log('handle ffa mode', this.state.ffaMode)
+        this.setState({
+            ...this.state,
+            ffaMode: !this.state.ffaMode,
         });
     }
 
@@ -101,6 +122,10 @@ export default class ControllerComponent extends ClientComponent {
         console.log(this.state);
         const song = this.state.playlist.songs.find(song => song.id === id);
         console.log('goto song', song);
+        if (this.state.ffaMode) {
+            song.guess_line = 9000;
+            song.guess_timecode = '99:00.00';
+        }
         this.socket.emit('goto-song', song);
         this.setState({
             ...this.state,
@@ -161,7 +186,11 @@ export default class ControllerComponent extends ClientComponent {
 
         return (
             <div className="controller">
-                <button onClick={this.handleReset}>!!!! RESET !!!!</button>
+                <div className="service">
+                    <button onClick={this.handleFfaToggle}>FFA {this.state.ffaMode? 'On' : 'Off'}</button>
+                    <button onClick={this.handlePerfModeToggle}>Perf {this.state.perfMode? 'On' : 'Off'}</button>
+                    <button className="warn" onClick={this.handleReset}> RESET </button>
+                </div>
                 <button onClick={this.handleToIntro}>To intro</button>
                 <button onClick={this.handleToCategories}>To Categories</button>
                 <div className="lyrics-form">

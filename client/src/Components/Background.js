@@ -46,6 +46,12 @@ export default class  Background extends React.Component {
     }
 
     render() {
+        if (this.props.perfMode) {
+            return (
+                <div className="background static-background">
+                </div>
+            )
+        }
         return (
             <div className={`background ${this.state.effect}`}>
                 { this.spots.map((s, i) => {

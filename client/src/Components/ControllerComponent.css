@@ -15,6 +15,14 @@
     display: flex;
 }
 
+.service {
+    display: flex;
+}
+
+button.warn {
+    background-color: rgb(177, 74, 61);
+}
+
 .lyrics-form input {
     line-height: 2em;
     font-size: 1em;

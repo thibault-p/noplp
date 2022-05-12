@@ -1,3 +1,12 @@
+.static-background {
+    background: url('../../public/static_bg.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    box-shadow: none;
+}
+
+
 .background {
     position: absolute;
     left: 0;

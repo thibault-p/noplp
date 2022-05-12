@@ -82,6 +82,9 @@ io.on('connection', (socket) => {
         socket.to('karaoke').emit('reveal-lyrics');
     });
 
+    socket.on('set-perf-mode', (args) => {
+        socket.to('karaoke').emit('set-perf-mode', args);
+    });
 });
 
 server.listen(port, () => console.log(`Listening on port ${port}`))

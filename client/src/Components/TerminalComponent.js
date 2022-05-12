@@ -24,7 +24,8 @@ export default class TerminalComponent extends ClientComponent {
                 state: STATE_LYRICS_NONE,
             },
             payload: {},
-            backgroundType: 'good',
+            backgroundType: '',
+            perfMode: false,
         };
         this.soundRefs = {
             intro: { ref: React.createRef(), volume: 1 },
@@ -76,6 +77,14 @@ export default class TerminalComponent extends ClientComponent {
 
         this.socket.on('reveal-lyrics', () => {
             this.handleSuggestedLyrics(STATE_LYRICS_REVEAL, '');
+        });
+
+        this.socket.on('set-perf-mode', data => {
+            console.log('Perf Mode', data)
+            this.setState({
+                ...this.state,
+                perfMode: data,
+            });
         });
     }
 
@@ -147,7 +156,7 @@ export default class TerminalComponent extends ClientComponent {
 
     render() {
         let content;
-        let background = (<Background effect={this.state.backgroundType} />);
+        let background = (<Background effect={this.state.backgroundType} perfMode={this.state.perfMode}/>);
         if (this.state.current === STATE_LOADING) {
             background = undefined;
             content =  this._renderLoading();
@@ -171,7 +180,7 @@ export default class TerminalComponent extends ClientComponent {
                 <audio src="/intro_bed.mp3" loop={true} ref={this.soundRefs.introBed.ref}></audio>
                 <audio src="/waiting.mp3" loop={true} ref={this.soundRefs.bed.ref}></audio>
                 <audio src="/win.mp3" ref={this.soundRefs.good.ref}></audio>
-                <audio src="/win.mp3" ref={this.soundRefs.bad.ref}></audio>
+                <audio src="/loose.mp3" ref={this.soundRefs.bad.ref}></audio>
                 <audio src="/freeze.mp3" ref={this.soundRefs.freeze.ref}></audio>
                 {background}
                 <div>
