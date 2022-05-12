@@ -33,10 +33,7 @@ const sockets = [];
 
 io.on('connection', (socket) => {
     
-    console.log(sockets)
-    console.log('New client connected', socket.id);
     sockets.push(socket.id)
-    console.log(socket.handshake.query.role)
 
     socket.join('karaoke');
     
@@ -49,12 +46,10 @@ io.on('connection', (socket) => {
     });
 
     socket.on('show-categories', (args) => {
-        console.log('show-categories', args);
         socket.to('karaoke').emit('to-categories', args);
     });
 
     socket.on('show-song-list', (args) => {
-        console.log('show-song-list', args);
         socket.to('karaoke').emit('to-song-list', args);
     });
 

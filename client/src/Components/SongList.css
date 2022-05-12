@@ -1,7 +1,8 @@
 .category-name {
+    width: 50vw;
+    top: 5vh;
     position: absolute;
     left: 50%;
-    top: 10vh;
     padding-left: 4em;
     padding-right: 4em;
     transform: translate(-50%);

@@ -80,7 +80,12 @@ export default class ControllerComponent extends ClientComponent {
     }
 
     handleToCategories() {
-        const categories = this.state.playlist.categories.map(c => c.name).sort();
+        const categories = this.state.playlist.categories.map(c => {
+            return {
+                ...c,
+                picked: this.state.pickedCategories.indexOf(c.id) !== -1
+            };
+        }).sort();
         console.log(categories);
         this.socket.emit('show-categories', categories);
     }
@@ -115,10 +120,10 @@ export default class ControllerComponent extends ClientComponent {
     }
 
     handleToSong(id) {
-            this.setState({
-                ...this.state,
-                pickedSongs: [...this.state.pickedSongs, id]
-            });
+        this.setState({
+            ...this.state,
+            pickedSongs: [...this.state.pickedSongs, id]
+        });
         console.log(this.state);
         const song = this.state.playlist.songs.find(song => song.id === id);
         console.log('goto song', song);

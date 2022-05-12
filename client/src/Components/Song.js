@@ -155,7 +155,7 @@ export default class Song extends React.Component {
 
         const timecode = Math.floor(this.audio.current.currentTime * 100);
         const i = this.state.currentLine; 
-        const nextCt = (i+1 < this.lyrics.length) ? this.lyrics[i+1].timecode : Number.MAX_VALUE;
+        const nextCt = (i + 1 < this.lyrics.length) ? this.lyrics[i+1].timecode : Number.MAX_VALUE;
 
         if (timecode > nextCt) {
             this.setState({
